@@ -18,7 +18,7 @@ def get_response(request):
         if (len(str.split(':')) > 1):
             header[str.split(':')[0]] = str.split(':')[1]
     if (command != 'GET'):
-        status = 'BAD'
+        status = '405 Method Not Allowed'
     if (path == '/'):
         text = 'Hello mister!\nYou are: ' + header['User-Agent']
     elif (path.split('/')[1] == 'media'):
@@ -50,11 +50,11 @@ while True:
     try:
         (client_socket, address) = server_socket.accept()
         print 'Got new client', client_socket.getsockname()  # Вывод адреса клиента
-        request_string = client_socket.recv(2048)  # Получение 2048 байт от клиента
+        request_string = client_socket.recv(2048)  # Получение до 2048 байт от клиента
         print request_string
         client_socket.send(get_response(request_string))  # Отправка ответа от сервера
         client_socket.close()
-    except KeyboardInterrupt:  # Обработка исключения
+    except KeyboardInterrupt:  # Обработка нажатия клавиш прерывания
         print 'Stopped'
         server_socket.close()  # Остановка операций сокетом сервера и освобождение ресурсов
         exit()
