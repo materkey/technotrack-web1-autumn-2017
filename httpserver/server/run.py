@@ -41,7 +41,7 @@ def get_response(request):
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind(('localhost', 8000))  # Привязка сокета к localhost:8000
+server_socket.bind(('127.0.0.1', 8000))  # Привязка сокета к localhost:8000
 server_socket.listen(0)  # Готовность прянимать connect() от клиентов
 
 print 'Started'
